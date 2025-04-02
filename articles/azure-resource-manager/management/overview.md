@@ -8,40 +8,80 @@ ms.custom: devx-track-arm-template
 
 # What is Azure Resource Manager?
 
-Azure Resource Manager is the deployment and management service for Azure. It provides a management layer that enables you to create, update, and delete resources in your Azure account. You use management features, like access control, locks, and tags, to secure and organize your resources after deployment.
-
-To learn about Azure Resource Manager templates (ARM templates), see the [ARM template overview](../templates/overview.md). To learn about Bicep, see [Bicep overview](../bicep/overview.md).
-
-The following video covers basic concepts of Azure Resource Manager.
-
-> [!VIDEO https://learn-video.azurefd.net/vod/player?id=d257e6ec-abab-47f4-a209-22049e7a40b4]
+* Azure Resource Manager
+  * 💡== Azure's deployment & management service💡
+  * == management layer /
+    * enables you, about resources | your Azure account, to
+      * create,
+      * update,
+      * delete  
+    * -- provides -- management features
+      * _Example:_ access control, locks, and tags
+  * [video](https://learn-video.azurefd.net/vod/player?id=d257e6ec-abab-47f4-a209-22049e7a40b4)
+    * ⚠️INDEPENDENTLY the way (Azure SDK, Azure Portal,), ALWAYS used intermediately⚠️
+      ![](overview-1.png)
+    * allows creating: compute, store, networking components
+      ![](overview-2.png)
+  * if you want to use IaC
+    * [Azure Resource Manager templates (ARM templates)](../templates/overview.md)
+    * [Bicep overview](../bicep/overview.md)
 
 ## Consistent management layer
 
-When you send a request through any of the Azure APIs, tools, or SDKs, Resource Manager receives the request. It authenticates and authorizes the request before forwarding it to the appropriate Azure service. Because all requests are handled through the same API, you see consistent results and capabilities in all the different tools.
-
-The following image shows the role Azure Resource Manager plays in handling Azure requests.
-
-:::image type="content" source="./media/overview/consistent-management-layer.png" alt-text="Diagram that shows the role of Azure Resource Manager in handling Azure requests." border="false":::
-
-All capabilities that are available in the portal are also available through PowerShell, Azure CLI, REST APIs, and client SDKs. Functionality initially released through APIs are represented in the portal within 180 days of initial release.
-
-> [!IMPORTANT]
-> Azure Resource Manager will only support Transport Layer Security (TLS) 1.2 or later by Fall 2023. For more information, see [Migrating to TLS 1.2 for Azure Resource Manager](tls-support.md).
+* | BEFORE forwarding it to the appropriate Azure service,
+  * authenticates &
+  * authorizes 
+* ALL requests -- are handled through the -- SAME API
+* how does Azure Resource Manager handle Azure requests?
+  ![](./media/overview/consistent-management-layer.png)
+* Azure Resource Manager
+  * -- will ONLY support -- Transport Layer Security (TLS) v1.2+
+    * see [Migrating to TLS 1.2 for Azure Resource Manager](tls-support.md)
 
 ## Terminology
 
 If you're new to Azure Resource Manager, there are some terms you might not be familiar with.
 
-* **resource** - A manageable item that is available through Azure. Virtual machines, storage accounts, web apps, databases, and virtual networks are examples of resources. Resource groups, subscriptions, management groups, and tags are also examples of resources.
-* **resource group** - A container that holds related resources for an Azure solution. The resource group includes those resources that you want to manage as a group. You decide which resources belong in a resource group based on what makes the most sense for your organization. See [What is a resource group?](#resource-groups).
-* **resource provider** - A service that supplies Azure resources. For example, a common resource provider is `Microsoft.Compute`, which supplies the virtual machine resource. `Microsoft.Storage` is another common resource provider. See [Resource providers and types](resource-providers-and-types.md).
-* **declarative syntax** - Syntax that lets you state "Here's what I intend to create" without having to write the sequence of programming commands to create it. ARM templates and Bicep files are examples of declarative syntax. In those files, you define the properties for the infrastructure to deploy to Azure.
-* **ARM template** - A JavaScript Object Notation (JSON) file that defines one or more resources to deploy to a resource group, subscription, management group, or tenant. The template can be used to deploy the resources consistently and repeatedly. See [Template deployment overview](../templates/overview.md).
-* **Bicep file** - A file for declaratively deploying Azure resources. Bicep is a language that was designed to provide the best authoring experience for infrastructure as code solutions in Azure. See [Bicep overview](../bicep/overview.md).
-* **extension resource** - A resource that adds to another resource's capabilities. For example, a role assignment is an extension resource. You apply a role assignment to any other resource to specify access. See [Extension resources](./extension-resource-types.md).
-
-For more definitions of Azure terminology, see [Azure fundamental concepts](/azure/cloud-adoption-framework/ready/considerations/fundamental-concepts).
+* **resource** 
+  * := manageable item / available | Azure 
+  * _Examples::_
+    * Virtual machines,
+    * storage accounts, 
+    * web apps,
+    * databases,
+    * virtual networks 
+    * Resource groups, 
+    * subscriptions,
+    * management groups,
+    * tags
+* **resource group**
+  * == container / holds Azure solution's related resources  
+    * includes ALSO those resources / you want to manage as a group
+  * see [What is a resource group?](#resource-groups)
+* **resource provider** 
+  * == service / -- supplies -- Azure resources 
+  * _Examples:_
+    * `Microsoft.Compute`
+      * -- supplies the -- virtual machine resource 
+    * `Microsoft.Storage` 
+  * see [Resource providers and types](resource-providers-and-types.md)
+* **declarative syntax** 
+  * TODO: Syntax that lets you state "Here's what I intend to create" without having to write the sequence of programming commands to create it. 
+  * ARM templates and Bicep files are examples of declarative syntax. 
+  * In those files, you define the properties for the infrastructure to deploy to Azure.
+* **ARM template** 
+  * A JavaScript Object Notation (JSON) file that defines one or more resources to deploy to a resource group, subscription, management group, or tenant. 
+  * The template can be used to deploy the resources consistently and repeatedly. 
+  * See [Template deployment overview](../templates/overview.md).
+* **Bicep file** 
+  * A file for declaratively deploying Azure resources. 
+  * Bicep is a language that was designed to provide the best authoring experience for infrastructure as code solutions in Azure.
+  * See [Bicep overview](../bicep/overview.md).
+* **extension resource** 
+  * A resource that adds to another resource's capabilities. 
+  * For example, a role assignment is an extension resource. 
+  * You apply a role assignment to any other resource to specify access. 
+  * See [Extension resources](./extension-resource-types.md).
 
 ## The benefits of using Resource Manager
 
