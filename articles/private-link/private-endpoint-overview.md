@@ -14,22 +14,21 @@ ms.custom: references_regions, template-concept
 
 # What is a private endpoint?
 
-A private endpoint is a network interface that uses a private IP address from your virtual network. This network interface connects you privately and securely to a service that's powered by Azure Private Link. By enabling a private endpoint, you're bringing the service into your virtual network.
-
-The service could be an Azure service such as:
-
-* Azure Storage
-* Azure Cosmos DB
-* Azure SQL Database
-* Your own service, using [Private Link service](private-link-service-overview.md).
+* private endpoint
+  * 💡:= network interface / 
+    * uses a private IP address | your virtual network💡
+    * connects you -- ,privately & securely, to a -- service / powered by Azure Private Link
+      * ALLOWED services
+        * Azure Storage
+        * Azure Cosmos DB
+        * Azure SQL Database
+        * your OWN service -- via -- [Private Link service](private-link-service-overview.md)
   
 ## Private endpoint properties 
 
-A private endpoint specifies the following properties: 
-
 |Property  |Description |
 |---------|---------|
-|Name    |    A unique name within the resource group.      |
+|Name    |    TODO: A unique name within the resource group.      |
 |Subnet    |  The subnet to deploy, where the private IP address is assigned. For subnet requirements, see the [Limitations](#limitations) section later in this article.         |
 |Private-link resource    |   The private-link resource to connect by using a resource ID or alias, from the list of available types. A unique network identifier is generated for all traffic that's sent to this resource.       |
 |Target subresource   |      The subresource to connect. Each private-link resource type has various options to select based on preference.    |
