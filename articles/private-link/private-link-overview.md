@@ -21,21 +21,18 @@ ms.custom: template-overview, fasttrack-edit, references_regions, FY23 content-m
       * == 
         * ❌service NOT exposed | public internet ❌
         * virtual network communicates -- via Microsoft backbone network, with -- service  
+  * [AVAILABILITY / Azure PaaS](availability.md)
   * Service
     * [how to create your own](private-link-service-overview.md)
     * == service BEHIND standard load balancer 
-  * 
-
-> Different Azure PaaS will onboard to Azure Private Link at different schedules. 
-> See [Private Link availability](availability.md) for an accurate status of Azure PaaS on Private Link.
- > For known limitations, see [Private Endpoint](private-endpoint-overview.md#limitations) and [Private Link Service](private-link-service-overview.md#limitations). 
+  * see limitations about
+    * [Private Endpoint](private-endpoint-overview.md#limitations)
+    * [Private Link Service](private-link-service-overview.md#limitations) 
 
 ![](./media/private-link-overview/private-link-center.png)
 
 ## Key benefits
-
-Azure Private Link provides the following benefits:  
-
+* TODO:
 - **Privately access services on the Azure platform**: Connect your virtual network using private endpoints to all services that can be used as application components in Azure. Service providers can render their services in their own virtual network and consumers can access those services in their local virtual network. The Private Link platform will handle the connectivity between the consumer and services over the Azure backbone network. 
  
 - **On-premises and peered networks**: Access services running in Azure from on-premises over ExpressRoute private peering, VPN tunnels, and peered virtual networks using private endpoints. There's no need to configure ExpressRoute Microsoft peering or traverse the internet to reach the service. Private Link provides a secure way to migrate workloads to Azure.
@@ -48,12 +45,6 @@ Azure Private Link provides the following benefits:
 
 > [!NOTE]
 > Azure Private Link, along with Azure Virtual Network, span across [Azure Availability Zones](../availability-zones/az-overview.md) and are therefore zone resilient. To provide high availability for the Azure resource using a private endpoint, ensure that resource is zone resilient.
-
-## Availability 
-
-For information on Azure services that support Private Link, see [Azure Private Link availability](availability.md).
-
-For the most up-to-date notifications, check the [Azure Private Link updates page](https://azure.microsoft.com/updates/?product=private-link).
 
 ## Logging and monitoring
 
