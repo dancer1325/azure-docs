@@ -12,14 +12,25 @@ ms.custom: template-overview, fasttrack-edit, references_regions, FY23 content-m
 
 # What is Azure Private Link? 
 
-Azure Private Link enables you to access Azure PaaS Services (for example, Azure Storage and SQL Database) and Azure hosted customer-owned/partner services over a [private endpoint](private-endpoint-overview.md) in your virtual network.
+* Azure Private Link
+  * 👀enables you 
+    * -- to access, via Virtual Network's [private endpoint](private-endpoint-overview.md), 
+      * to -- 👀 
+        * Azure PaaS Services (_Example:_ Azure Storage and SQL Database) &
+        * Azure hosted customer-owned/partner services
+      * == 
+        * ❌service NOT exposed | public internet ❌
+        * virtual network communicates -- via Microsoft backbone network, with -- service  
+  * Service
+    * [how to create your own](private-link-service-overview.md)
+    * == service BEHIND standard load balancer 
+  * 
 
-Traffic between your virtual network and the service travels the Microsoft backbone network. Exposing your service to the public internet is no longer necessary. You can create your own [private link service](private-link-service-overview.md) in your virtual network and deliver it to your customers. Setup and consumption using Azure Private Link is consistent across Azure PaaS, customer-owned, and shared partner services.
+> Different Azure PaaS will onboard to Azure Private Link at different schedules. 
+> See [Private Link availability](availability.md) for an accurate status of Azure PaaS on Private Link.
+ > For known limitations, see [Private Endpoint](private-endpoint-overview.md#limitations) and [Private Link Service](private-link-service-overview.md#limitations). 
 
-> [!IMPORTANT]
-> Azure Private Link is now generally available. Both Private Endpoint and Private Link service (service behind standard load balancer) are generally available. Different Azure PaaS will onboard to Azure Private Link at different schedules. See [Private Link availability](availability.md) for an accurate status of Azure PaaS on Private Link. For known limitations, see [Private Endpoint](private-endpoint-overview.md#limitations) and [Private Link Service](private-link-service-overview.md#limitations). 
-
-:::image type="content" source="./media/private-link-overview/private-link-center.png" alt-text="Screenshot of Azure Private Link center in Azure portal." :::
+![](./media/private-link-overview/private-link-center.png)
 
 ## Key benefits
 
