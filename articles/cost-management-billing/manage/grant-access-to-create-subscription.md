@@ -1,18 +1,20 @@
 ---
 title: Grant access to create Azure Enterprise subscriptions
 description: Learn how to give a user or service principal the ability to programmatically create Azure Enterprise subscriptions.
-author: bandersmsft
+author: SandeepReddyAcc
 ms.service: cost-management-billing
 ms.subservice: billing
-ms.reviewer: andalmia
-ms.topic: conceptual
-ms.date: 09/11/2024
-ms.author: banders
+ms.reviewer: anjai
+ms.topic: how-to
+ms.date: 12/29/2025
+ms.author: v-salin
+ms.custom: NonCE
+service.tree.id: 9aca7c0a-9d64-4346-a8f6-50141d9c9d5c
 ---
 
 # Grant access to create Azure Enterprise subscriptions (legacy)
 
-As an Azure customer with an [Enterprise Agreement (EA)](https://azure.microsoft.com/pricing/enterprise-agreement/), you can give another user or service principal permission to create subscriptions billed to your account. In this article, you learn how to use [Azure role-based access control (Azure RBAC)](../../role-based-access-control/role-assignments-portal.yml) to share the ability to create subscriptions, and how to audit subscription creations. You must have the Owner role on the account you wish to share.
+As an Azure customer with an [Enterprise Agreement (EA)](https://azure.microsoft.com/pricing/enterprise-agreement/), you can give another user or service principal permission to create subscriptions billed to your account. In this article, you learn how to use [Azure role-based access control (Azure RBAC)](/azure/role-based-access-control/role-assignments-portal) to share the ability to create subscriptions, and how to audit subscription creations. You must have the Owner role on the account you wish to share.
 
 > [!NOTE]
 > - This API only works with the [legacy APIs for subscription creation](programmatically-create-subscription-preview.md). 
@@ -23,7 +25,7 @@ As an Azure customer with an [Enterprise Agreement (EA)](https://azure.microsoft
 
 ## Grant access
 
-To [create subscriptions under an enrollment account](programmatically-create-subscription-enterprise-agreement.md), users must have the Azure RBAC [Owner role](../../role-based-access-control/built-in-roles.md#owner) on that account. You can grant a user or a group of users the Azure RBAC Owner role on an enrollment account by following these steps:
+To [create subscriptions under an enrollment account](programmatically-create-subscription-preview.md), users must have the Azure RBAC [Owner role](../../role-based-access-control/built-in-roles.md#owner) on that account. You can grant a user or a group of users the Azure RBAC Owner role on an enrollment account by following these steps:
 
 1. Get the object ID of the enrollment account you want to grant access to
 

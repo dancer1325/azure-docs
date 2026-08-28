@@ -5,7 +5,7 @@ description: Learn how to integrate Azure AD B2C authentication with BlokSec for
 author: gargi-sinha
 manager: martinco
 ms.reviewer: kengaderdus
-ms.service: azure-active-directory
+ms.service: entra-id
 ms.topic: how-to
 ms.date: 06/21/2024
 ms.author: gasinh
@@ -16,6 +16,8 @@ zone_pivot_groups: b2c-policy-type
 ---
 
 # Tutorial: Configure Azure Active Directory B2C with BlokSec for passwordless authentication
+
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
 ## Before you begin
 
@@ -38,7 +40,7 @@ BlokSec integration includes the following components:
 * **BlokSec Decentralized Identity Router** – gateway for services that apply BlokSec DIaaS to route authentication and authorization requests to user Personal Identity Provider (PIdP) applications
   * It's an OpenID Connect (OIDC) identity provider in Azure AD B2C
 * **BlokSec SDK-based mobile app** – user PIdP in the decentralized authentication scenario. 
-  * If you're not using the BlokSec SDK, go to Google Play for the free [BlokSec yuID](https://play.google.com/store/apps/details?id=com.bloksec)
+  * If you're not using the BlokSec SDK, go to Google Play for the free [BlokSec yuID](https://play.google.com/store/apps/details/Google?id=com.google.android.googlequicksearchbox&hl=en-US)
 
 The following architecture diagram illustrates the sign-up, sign-in flow in the BlokSec solution implementation.
 
@@ -65,7 +67,7 @@ The following architecture diagram illustrates the sign-up, sign-in flow in the 
 To get started, you need:
 
 * An Azure subscription
-  * If you don't have one, get an [Azfree account](https://azure.microsoft.com/free/)
+  * If you don't have one, get an [Azfree account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 * An [Azure AD B2C tenant](./tutorial-create-tenant.md) linked to the Azure subscription
 * A BlokSec [demo](https://bloksec.com/)
 * Register a web application

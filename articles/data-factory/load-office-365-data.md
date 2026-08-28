@@ -1,16 +1,19 @@
 ---
 title: Load data from Microsoft 365 (Office 365) by using Azure Data Factory 
 description: 'Use Azure Data Factory to copy data from Microsoft 365 (Office 365)'
-author: jianleishen
+author: simplywilson
 ms.subservice: data-movement
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/15/2024
-ms.author: jianleishen
+ms.author: tinglee
+ms.custom: sfi-image-nochange
 ---
 
 # Load data from Microsoft 365 (Office 365) by using Azure Data Factory
 
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
+
+[!INCLUDE [Migrate to Data Factory in Microsoft Fabric](includes/migrate-to-fabric.md)]
 
 This article shows you how to use the Data Factory _load data from Microsoft 365 (Office 365) into Azure Blob storage_. You can follow similar steps to copy data to Azure Data Lake Gen1 or Gen2. Refer to [Microsoft 365 (Office 365) connector article](connector-office-365.md) on copying data from Microsoft 365 (Office 365) in general.
 
@@ -109,7 +112,7 @@ To see activity runs associated with the pipeline run, select the **View Activit
 
 :::image type="content" source="./media/load-office-365-data/activity-status.png" alt-text="Monitor activity"::: 
 
-If this is the first time you are requesting data for this context (a combination of which data table is being access, which destination account is the data being loaded into, and which user identity is making the data access request), you will see the copy activity status as **In Progress**, and only when you select into "Details" link under Actions will you see the status as **RequesetingConsent**.  A member of the data access approver group needs to approve the request in the Privileged Access Management before the data extraction can proceed.
+If this is the first time you are requesting data for this context (a combination of which data table is being access, which destination account is the data being loaded into, and which user identity is making the data access request), you will see the copy activity status as **In Progress**, and only when you select into "Details" link under Actions will you see the status as **RequestingConsent**.  A member of the data access approver group needs to approve the request in the Privileged Access Management before the data extraction can proceed.
 
 _Status as requesting consent:_
 :::image type="content" source="./media/load-office-365-data/activity-details-request-consent.png" alt-text="Activity execution details - request consent"::: 

@@ -182,7 +182,7 @@ Resource specific table entry:
     "TrackingId": "fb1b3676-bb2d-4b17-85b7-be1c7aa1967e",
     "Message": "Scaled-up EventHub TUs (UpdateStartTimeUTC: 5/13/2021 7:48:36 AM, PreviousValue: 1, UpdatedThroughputUnitValue: 2, AutoScaleReason: 'IncomingMessagesPerSecond reached 2170')",
     "ResourceId": "/subscriptions/0000000-0000-0000-0000-000000000000/resourcegroups/testrg/providers/microsoft.eventhub/namespaces/namespace-name",
-    "timeGenerated (UTC) : "9/28/2022 8:40:06 PM +00:00",
+    "timeGenerated (UTC)" : "9/28/2022 8:40:06 PM +00:00",
     "Provider" : "EVENTHUB",
     "Type" : "AZMSAutoscaleLogs"
 }
@@ -333,7 +333,7 @@ AzureDiagnostics:
    "ActivityId": "11111111-1111-1111-1111-111111111111",
    "category": "error"
    "resourceId": "/SUBSCRIPTIONS/11111111-1111-1111-1111-11111111111/RESOURCEGROUPS/DEFAULT-EVENTHUB-CENTRALUS/PROVIDERS/MICROSOFT.EVENTHUB/NAMESPACES/FBETTATI-OPERA-EVENTHUB",
-   "keyVault": "https://mykeyvault.vault-int.azure-int.net",
+   "keyVault": "https://mykeyvault.vault.azure.net",
    "key": "mykey",
    "version": "1111111111111111111111111111111",
    "operation": "wrapKey",
@@ -345,7 +345,7 @@ AzureDiagnostics:
    "ActivityId": "11111111111111-1111-1111-1111111111111",
    "category": "info"
    "resourceId": "/SUBSCRIPTIONS/111111111-1111-1111-1111-11111111111/RESOURCEGROUPS/DEFAULT-EVENTHUB-CENTRALUS/PROVIDERS/MICROSOFT.EVENTHUB/NAMESPACES/FBETTATI-OPERA-EVENTHUB",
-   "keyVault": "https://mykeyvault.vault-int.azure-int.net",
+   "keyVault": "https://mykeyvault.vault.azure.net",
    "key": "mykey",
    "version": "111111111111111111111111111111",
    "operation": "disable | restore",
@@ -361,7 +361,7 @@ Resource specific table entry:
    "ActivityId": "11111111-1111-1111-1111-111111111111",
    "category": "error"
    "resourceId": "/SUBSCRIPTIONS/11111111-1111-1111-1111-11111111111/RESOURCEGROUPS/DEFAULT-EVENTHUB-CENTRALUS/PROVIDERS/MICROSOFT.EVENTHUB/NAMESPACES/FBETTATI-OPERA-EVENTHUB",
-   "keyVault": "https://mykeyvault.vault-int.azure-int.net",
+   "keyVault": "https://mykeyvault.vault.azure.net",
    "key": "mykey",
    "version": "1111111111111111111111111111111",
    "operation": "wrapKey",
@@ -376,7 +376,7 @@ Resource specific table entry:
    "ActivityId": "11111111111111-1111-1111-1111111111111",
    "category": "info"
    "resourceId": "/SUBSCRIPTIONS/111111111-1111-1111-1111-11111111111/RESOURCEGROUPS/DEFAULT-EVENTHUB-CENTRALUS/PROVIDERS/MICROSOFT.EVENTHUB/NAMESPACES/FBETTATI-OPERA-EVENTHUB",
-   "keyVault": "https://mykeyvault.vault-int.azure-int.net",
+   "keyVault": "https://mykeyvault.vault.azure.net",
    "key": "mykey",
    "version": "111111111111111111111111111111",
    "operation": "disable | restore",

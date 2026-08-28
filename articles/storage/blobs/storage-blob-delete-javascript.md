@@ -3,13 +3,14 @@ title: Delete and restore a blob with JavaScript or TypeScript
 titleSuffix: Azure Storage
 description: Learn how to delete and restore a blob in your Azure Storage account using the JavaScript client library
 services: storage
-author: pauljewellmsft
-ms.author: pauljewell
+author: stevenmatthew
+ms.author: shaas
 ms.date: 10/28/2024
 ms.service: azure-blob-storage
 ms.topic: how-to
 ms.devlang: javascript
 ms.custom: devx-track-js, devguide-js, devx-track-ts, devguide-ts
+# Customer intent: "As a developer using JavaScript, I want to delete and restore blobs in Azure Storage, so that I can manage my data more effectively and recover from accidental deletions."
 ---
 
 # Delete and restore a blob with JavaScript or TypeScript
@@ -76,7 +77,7 @@ To learn more about how to delete blobs and restore deleted blobs using the Azur
 
 ### Code samples
 
-- View [JavaScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/delete-blob.js) and [TypeScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/TypeScript/NodeJS-v12/dev-guide/src/delete-blob.ts) code samples from this article (GitHub)
+- View [JavaScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/delete-blob.js) and [TypeScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/TypeScript/NodeJS-v12/dev-guide/src/blob-delete.ts) code samples from this article (GitHub)
 
 ### REST API operations
 
@@ -93,3 +94,4 @@ The Azure SDK for JavaScript contains libraries that build on top of the Azure R
 - [Blob versioning](versioning-overview.md)
 
 [!INCLUDE [storage-dev-guide-next-steps-javascript](../../../includes/storage-dev-guides/storage-dev-guide-next-steps-javascript.md)]
+

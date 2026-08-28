@@ -3,14 +3,15 @@ title: Download a blob with JavaScript or TypeScript
 titleSuffix: Azure Storage
 description: Learn how to download a blob in Azure Storage by using the JavaScript client library.
 services: storage
-author: pauljewellmsft
+author: stevenmatthew
 
-ms.author: pauljewell
+ms.author: shaas
 ms.date: 10/28/2024
 ms.service: azure-blob-storage
 ms.topic: how-to
 ms.devlang: javascript
 ms.custom: devx-track-js, devguide-js, devx-track-ts, devguide-ts
+# Customer intent: As a developer using JavaScript or TypeScript, I want to download blobs from Azure Storage, so that I can handle and utilize storage data effectively in my applications.
 ---
 
 # Download a blob with JavaScript or TypeScript
@@ -77,6 +78,41 @@ The following Node.js example downloads a blob to a string with [BlobClient.down
 
 If you're working with JavaScript in the browser, blob data returns in a promise [blobBody](/javascript/api/@azure/storage-blob/blobdownloadresponseparsed#@azure-storage-blob-blobdownloadresponseparsed-blobbody). To learn more, see the example usage for browsers at [BlobClient.download](/javascript/api/@azure/storage-blob/blobclient#@azure-storage-blob-blobclient-download).
 
+
+## Data transfer validation on download
+
+[!INCLUDE [storage-dev-guide-transfer-validation](../../../includes/storage-dev-guides/storage-dev-guide-transfer-validation.md)]
+
+Transfer validation options can be defined at the client level using [BlobClientConfig](/javascript/api/@azure/storage-blob/blobclientconfig), which applies validation options to all methods called from a [BlobClient](/javascript/api/@azure/storage-blob/blobclient) instance.  Alternatively, you can override transfer validation options at the operation level via options, such as [BlobDownloadOptions](/javascript/api/@azure/storage-blob/blobdownloadoptions).
+
+### [JavaScript](#tab/javascript)
+
+```javascript
+const blobServiceClient = new BlobServiceClient(
+   `https://${account}.blob.core.windows.net`,
+   new DefaultAzureCredential(),
+   {
+     uploadContentChecksumAlgorithm: "StorageCrc64",
+     downloadContentChecksumAlgorithm: "StorageCrc64",
+   }
+);
+```
+
+### [TypeScript](#tab/typescript)
+
+```typescript
+ const blobServiceClient: BlobServiceClient = new BlobServiceClient(
+   `https://${account}.blob.core.windows.net`,
+   new DefaultAzureCredential(),
+   {
+     uploadContentChecksumAlgorithm: "StorageCrc64",
+     downloadContentChecksumAlgorithm: "StorageCrc64",
+   },
+);
+```
+
+---
+
 ## Resources
 
 To learn more about how to download blobs using the Azure Blob Storage client library for JavaScript, see the following resources.
@@ -85,9 +121,11 @@ To learn more about how to download blobs using the Azure Blob Storage client li
 
 View code samples from this article (GitHub):
 
-- Download to file for [JavaScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/download-blob-to-file.js) or [TypeScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/src/download-blob-to-file.ts)
-- Download to stream for [JavaScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/download-blob-to-stream.js) or [TypeScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/src/download-blob-to-stream.ts)
-- Download to string for [JavaScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/download-blob-to-string.js) or [TypeScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/src/download-blob-to-string.ts)
+- Download to file for [JavaScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/download-blob-to-file.js) or [TypeScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/TypeScript/NodeJS-v12/dev-guide/src/blob-download-to-file.ts)
+
+- Download to stream for [JavaScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/download-blob-to-stream.js) or [TypeScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/TypeScript/NodeJS-v12/dev-guide/src/blob-download-to-stream.ts)
+
+- Download to string for [JavaScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/JavaScript/NodeJS-v12/dev-guide/download-blob-to-string.js) or [TypeScript](https://github.com/Azure-Samples/AzureStorageSnippets/blob/master/blobs/howto/TypeScript/NodeJS-v12/dev-guide/src/blob-download-to-string.ts)
 
 ### REST API operations
 
@@ -98,3 +136,4 @@ The Azure SDK for JavaScript contains libraries that build on top of the Azure R
 [!INCLUDE [storage-dev-guide-resources-javascript](../../../includes/storage-dev-guides/storage-dev-guide-resources-javascript.md)]
 
 [!INCLUDE [storage-dev-guide-next-steps-javascript](../../../includes/storage-dev-guides/storage-dev-guide-next-steps-javascript.md)]
+

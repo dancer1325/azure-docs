@@ -1,12 +1,18 @@
 ---
 title: Azure Application Gateway listener configuration
-description: This article describes how to configure Azure Application Gateway listeners.
+description: Learn how Application Gateway listeners handle incoming web requests efficiently. Configure protocols, certificates, HTTP2 support, and WebSocket connectivity for optimal performance.
+#customer intent: As a network administrator, I want to understand how to configure Application Gateway listeners so that I can properly handle incoming web requests for my organization's applications.
 services: application-gateway
-author: greg-lindsay
+author: mbender-ms
 ms.service: azure-application-gateway
-ms.topic: conceptual
-ms.date: 07/19/2023
-ms.author: greglin 
+ms.topic: concept-article
+ms.date: 08/18/2026
+ms.author: mbender
+ms.custom:
+  - ai-gen-docs-bap
+  - ai-gen-description
+  - ai-seo-date:06/16/2025
+# Customer intent: As a network administrator, I want to configure listeners for the Azure Application Gateway, so that I can manage incoming requests effectively based on protocols, ports, and host headers for optimal traffic routing.
 ---
 
 # Application Gateway listener configuration
@@ -19,21 +25,33 @@ When you create an application gateway by using the Azure portal, you also creat
 
 ## Listener type
 
-When you create a new listener, you choose between [*basic* and *multi-site*](./application-gateway-components.md#types-of-listeners).
+When you create a new listener, you choose between [*basic* and *multi-site*](./application-gateway-components.md#types-of-listeners). The choice depends on whether routing depends on the host name in the incoming request.
 
-- If you want all of your requests (for any domain) to be accepted and forwarded to backend pools, choose basic. Learn [how to create an application gateway with a basic listener](./quick-create-portal.md).
+| Routing depends on the host name | Listener type | Behavior |
+| --- | --- | --- |
+| No | Basic | Accept and forward all requests for any domain to backend pools. Learn [how to create an application gateway with a basic listener](./quick-create-portal.md). |
+| Yes | Multi-site | Forward requests to different backend pools based on the *host* header or host names. Application Gateway relies on HTTP 1.1 host headers to host more than one website on the same public IP address and port. To differentiate requests on the same port, you must specify a host name that matches the incoming request. |
 
-- If you want to forward requests to different backend pools based on the *host* header or host names, choose multi-site listener. Application Gateway relies on HTTP 1.1 host headers to host more than one website on the same public IP address and port.  To differentiate requests on the same port, you must specify a host name that matches with the incoming request. To learn more, see [hosting multiple sites using Application Gateway](multiple-site-overview.md).
+To learn more about multi-site listeners, see [hosting multiple sites using Application Gateway](multiple-site-overview.md).
 
 ### Order of processing listeners
 
 For the v1 SKU, requests are matched according to the order of the rules and the type of listener. If a rule with basic listener comes first in the order, it's processed first and will accept any request for that port and IP combination. To avoid this, configure the rules with multi-site listeners first and push the rule with the basic listener to the last in the list.
 
-For the v2 SKU, multi-site listeners are processed before basic listeners, unless rule priority is defined. If using rule priority, wildcard listeners should be defined a priority with a number greater than non-wildcard listeners, to ensure non-wildcard listeners execute prior to the wildcard listeners.
+For the v2 SKU, rule priority defines the order in which listeners are processed. Wildcard and basic listeners should be defined a priority with a number greater than site-specific and multi-site listeners, to ensure site-specific and multi-site listeners execute prior to the wildcard and basic listeners.
+
+The following table summarizes how processing order is determined in each SKU.
+
+| SKU | What determines the order | Recommended configuration |
+| --- | --- | --- |
+| v1 | The order of the rules and the type of listener. A rule with a basic listener that comes first in the order processes first and accepts any request for that port and IP combination. | Configure the rules with multi-site listeners first, and push the rule with the basic listener to the last position in the list. |
+| v2 | Rule priority. | Define wildcard and basic listeners with a priority number greater than the number used for site-specific and multi-site listeners, so that the site-specific and multi-site listeners execute first. |
 
 ## Frontend IP address
 
 Choose the frontend IP address that you plan to associate with this listener. The listener will listen to incoming requests on this IP.
+
+Choose a public frontend IP address when clients reach the application behind this listener over the internet. Choose a private frontend IP address for an internal endpoint that isn't exposed to the internet, such as an internal line-of-business application or a tier of a multitier application that still requires load distribution, session stickiness, or TLS termination. For the supported combinations, see [Frontend IP address configuration](configuration-frontend-ip.md).
 
   > [!NOTE]
   > Application Gateway frontend supports dual-stack IP addresses. You can create up to four frontend IP addresses: Two IPv4 addresses (public and private) and two IPv6 addresses (public and private).
@@ -42,6 +60,8 @@ Choose the frontend IP address that you plan to associate with this listener. Th
 ## Frontend port
 
 Associate a frontend port. You can select an existing port or create a new one. Choose any value from the [allowed range of ports](./application-gateway-components.md#ports). You can use not only well-known ports, such as 80 and 443, but any allowed custom port that's suitable. The same port can be used for public and private listeners. 
+
+Port 80 is the typical choice for an HTTP listener, and port 443 is the typical choice for an HTTPS listener. Use a custom port when your application requires one, and confirm that the value falls within the allowed range for your SKU, because the supported range differs between the v1 and v2 SKUs.
 
 >[!NOTE] 
 > When using private and public listeners with the same port number, your application gateway changes the "destination" of the inbound flow to the frontend IPs of your gateway. Hence, depending on your Network Security Group's configuration, you may need an inbound rule with **Destination IP addresses** as your application gateway's public and private frontend IPs.
@@ -56,7 +76,7 @@ Associate a frontend port. You can select an existing port or create a new one. 
 
 ## Protocol
 
-Choose HTTP or HTTPS:
+Choose HTTP or HTTPS. Choose HTTPS when traffic between the client and the application gateway must be encrypted, which also lets the gateway offload the encryption and decryption work so that your backend servers aren't burdened by TLS computation overhead. Choose HTTP when that encryption isn't required for the traffic that this listener accepts.
 
 - If you choose HTTP, the traffic between the client and the application gateway is unencrypted.
 
@@ -85,7 +105,13 @@ $gw.EnableHttp2 = $true
 Set-AzApplicationGateway -ApplicationGateway $gw
 ```
 
-You can also enable HTTP2 support using the Azure portal by selecting **Enabled** under **HTTP2** in Application gateway > Configuration. 
+> [!IMPORTANT]
+> When creating an application gateway resource through the Azure portal, the default option for **HTTP2** is set as enabled. You can choose **Disabled** during creation, and re-enabled HTTP2 support using the Azure portal by selecting **Enabled** under **HTTP2** in **Application gateway > Configuration**.
+>
+> In instances where HTTP2 isn't supported by a client, HTTP1.1 will be used. Enabling HTTP2 doesn't disable HTTP1.1; it allows support for both.
+
+> [!NOTE]
+> Application Gateway only supports HTTP/2 over TLS (HTTPS listeners). HTTP/2 Cleartext (h2c) protocol upgrade attempts from HTTP/1.1 are not supported and will result in a 403 Forbidden error. Clients attempting h2c upgrades should use native HTTP/2 connections over HTTPS or remain on HTTP/1.1.
 
 ### WebSocket support
 

@@ -1,14 +1,15 @@
 ---
 title: Programmatically create Azure subscriptions for a Microsoft Partner Agreement with the latest APIs
 description: Learn how to create Azure subscriptions for a Microsoft Partner Agreement programmatically using the latest versions of REST API, Azure CLI, Azure PowerShell, and Azure Resource Manager templates.
-author: bandersmsft
+author: mijeffer
+ms.author: mijeffer
+ms.reviewer: mijeffer
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 08/14/2024
-ms.reviewer: sgautam
-ms.author: banders
+ms.date: 06/07/2026
 ms.custom: devx-track-azurepowershell, devx-track-azurecli, devx-track-arm-template, devx-track-bicep
+service.tree.id: b69a7832-2929-4f60-bf9d-c6784a865ed8
 ---
 
 # Programmatically create Azure subscriptions for a Microsoft Partner Agreement with the latest APIs
@@ -25,7 +26,7 @@ You can't create support plans programmatically. You can buy a new support plan 
 
 ## Prerequisites
 
-You must have a Global Admin or  Admin Agent role in your organization's cloud solution provider account to create subscription for your billing account. For more information, see [Partner Center - Assign users roles and permissions](/partner-center/permissions-overview).
+You must have an Admin Agent role in your organization's cloud solution provider account to create subscription for your billing account. For more information, see [Partner Center - Assign users roles and permissions](/partner-center/permissions-overview).
 
 If you don't know whether you have access to a Microsoft Partner Agreement account, see [Check access to a Microsoft Partner Agreement](mpa-request-ownership.md#check-access-to-a-microsoft-partner-agreement).
 

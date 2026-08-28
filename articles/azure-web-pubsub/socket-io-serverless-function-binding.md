@@ -6,7 +6,7 @@ author: zackliu
 ms.author: chenyl
 ms.date: 9/1/2024
 ms.service: azure-web-pubsub
-ms.topic: conceptual
+ms.topic: reference
 ---
 
 # Socket.IO Azure Function trigger and binding (Preview)
@@ -26,7 +26,7 @@ This article explains how to use Socket.IO serverless integrate with Azure Funct
 [Samples](https://github.com/Azure/azure-webpubsub/tree/main/sdk/webpubsub-socketio-extension/examples)
 
 > [!IMPORTANT]
-> Azure Function bindings can only integrate with Web PubSub for Socket.IO in Serverlesse Mode.
+> Azure Function bindings can only integrate with Web PubSub for Socket.IO in Serverless Mode.
 
 ### Authenticate and Connection String
 
@@ -62,7 +62,7 @@ When deployed use the [application settings](../azure-functions/functions-how-to
 |WebPubSubForSocketIOConnectionString__credential |  Defines how a token should be obtained for the connection. This setting should be set to `managedidentity` if your deployed Azure Function intends to use managed identity authentication. This value is only valid when a managed identity is available in the hosting environment.|
 |WebPubSubForSocketIOConnectionString__clientId | When `credential` is set to `managedidentity`, this property can be set to specify the user-assigned identity to be used when obtaining a token. The property accepts a client ID corresponding to a user-assigned identity assigned to the application. If not specified, the system-assigned identity is used.|
 
-The function binding follows the common properties for identity based configuration. See [Common properties for identity-based connections](../azure-functions/functions-reference.md?#common-properties-for-identity-based-connections) for more unmentioned properties.
+The function binding follows the common properties for identity based configuration. See [Define connections](../azure-functions/manage-connections.md?tabs=identity%2Cbindings#define-connections) for additional properties.
 
 For the local development, use the `local.settings.json` file to store the connection string. Set `WebPubSubForSocketIOConnectionString` to the connection string copied from the previous step:
 
@@ -76,7 +76,7 @@ For the local development, use the `local.settings.json` file to store the conne
 }
 ```
 
-If you want to use identity based configuration and running online, the `AzureWebJobsStorage` should refer to [Connecting to host storage with an identity](../azure-functions/functions-reference.md#connecting-to-host-storage-with-an-identity).
+If you want to use identity based configuration and running online, the `AzureWebJobsStorage` should refer to [Connecting to host storage with an identity](../azure-functions/manage-connections.md?tabs=host%2Cidentity#define-connections).
 
 ## Input Binding
 
@@ -240,7 +240,7 @@ The attribute for trigger binding is `[SocketIOTrigger]`.
 
 #### SocketIOAttribute
 
-`SocketIOAttribute` is an alternative of `ParameterNames`, which simplifies the function definition. For example, the following two definitions have the same effection:
+`SocketIOAttribute` is an alternative of `ParameterNames`, which simplifies the function definition. For example, the following two definitions have the same effect:
 
 ```cs
 [FunctionName("SocketIOTriggerMessage")]

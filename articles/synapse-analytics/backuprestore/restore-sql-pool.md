@@ -1,19 +1,20 @@
 ---
 title: Restore an existing dedicated SQL pool
 description: How-to guide for restoring an existing dedicated SQL pool.
-author: realAngryAnalytics
-ms.author: stevehow
-manager: joannapea
-ms.reviewer: joanpo, wiassaf
+author: joannapea 
+ms.author: joanpo
 ms.date: 01/23/2024
 ms.service: azure-synapse-analytics
 ms.subservice: sql
 ms.topic: how-to
 ms.custom:
   - devx-track-azurepowershell
+  - sfi-image-nochange
 ---
 
 # Restore an existing dedicated SQL pool
+
+[!INCLUDE [synapse-fabric-migration](../includes/synapse-fabric-migration.md)]
 
 In this article, you learn how to restore an existing dedicated SQL pool in Azure Synapse Analytics using Azure portal, Synapse Studio, and PowerShell. This article applies to both restores and geo-restores. 
 
@@ -138,7 +139,7 @@ Steps:
 
 1. Update Az.Sql Module to 3.8.0 (or greater) if on an older version using `Update-Module`. Otherwise it will cause failures. To validate your version via PowerShell:
    ```powershell
-   foreach ($i in (get-module -ListAvailable | ?{$_.name -eq 'az.sql'}).Version) { $version = [string]$i.Major + "." + [string]$i.Minor; if ($version -gt 3.7) {write-host "Az.Sql version $version installed. Prequisite met."} else {update-module az.sql} }
+   foreach ($i in (get-module -ListAvailable | ?{$_.name -eq 'az.sql'}).Version) { $version = [string]$i.Major + "." + [string]$i.Minor; if ($version -gt 3.7) {write-host "Az.Sql version $version installed. Prerequisite met."} else {update-module az.sql} }
    ```
    
 1. Connect to your Azure account and list all the subscriptions associated with your account.
@@ -215,6 +216,7 @@ Steps:
 
 
 ## <a id="troubleshooting"></a> Troubleshoot
+### Error: RequestTimeout during restore
 A restore operation can result in a deployment failure based on a "RequestTimeout" exception. 
 
 :::image type="content" source="../media/sql-pools/restore-sql-pool-troubleshooting-failed.png" alt-text="Screenshot from resource group deployments dialog of a timeout exception.":::
@@ -222,6 +224,18 @@ A restore operation can result in a deployment failure based on a "RequestTimeou
 This timeout can be ignored. Review the dedicated SQL pool page in the Azure portal and it might still have status of "Restoring" and eventually will transition to "Online". 
 
 :::image type="content" source="../media/sql-pools/restore-sql-pool-troubleshooting-restoring.png" alt-text="Screenshot of SQL pool dialog with the status that shows restoring.":::
+
+### Error: "ValidationFailed: The provided resource ID is not valid for this operation. Please use a SQL pool resource"
+If you receive this error, verify that the `sourceDatabaseId` uses a supported resource ID format and identifies the intended source dedicated SQL pool.
+
+**Supported formats**
+
+**Synapse SQL pool resource ID**
+/subscriptions/{subscriptionId}/resourceGroups/{workspaceResourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}
+
+**Managed SQL Database Resource ID**
+/subscriptions/{subscriptionId}/resourceGroups/{managedResourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}
+
 
 ## Related content
 

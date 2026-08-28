@@ -1,9 +1,9 @@
 ---
- author: cherylmc
+ author: duongau
  ms.service: azure-vpn-gateway
  ms.topic: include
  ms.date: 06/19/2024
- ms.author: cherylmc
+ ms.author: duau
 ---
 ### How many VPN client endpoints can I have in my point-to-site configuration?
 
@@ -13,16 +13,8 @@ It depends on the gateway SKU. For more information on the supported number of c
 
 The following client operating systems are supported:
 
-* Windows Server 2008 R2 (64-bit only)
-* Windows 8.1 (32-bit and 64-bit)
-* Windows Server 2012 (64-bit only)
-* Windows Server 2012 R2 (64-bit only)
-* Windows Server 2016 (64-bit only)
-* Windows Server 2019 (64-bit only)
-* Windows Server 2022 (64-bit only)
-* Windows 10
 * Windows 11
-* macOS version 10.11 or later
+* macOS version 13.0 or later
 * Linux (strongSwan)
 * iOS
 
@@ -83,6 +75,9 @@ IKEv2 is supported on Windows 10 and Windows Server 2016. However, to use IKEv2 
 > [!NOTE]
 > Windows OS builds newer than Windows 10 Version 1709 and Windows Server 2016 Version 1607 don't require these steps.
 
+> [!NOTE]
+>Microsoft recommends using Windows 11 with Point-to-Site VPN connections. Windows 10 reached end of support in October 2025. For more information, see [Supported Windows versions for Azure VPN Client](../articles/vpn-gateway/azure-vpn-client-versions.md#supported-windows-versions).
+
 To prepare Windows 10 or Windows Server 2016 for IKEv2:
 
 1. Install the update based on your OS version:
@@ -108,7 +103,7 @@ The traffic selector limit for OpenVPN is 1,000 routes.
 
 ### What happens when I configure both SSTP and IKEv2 for P2S VPN connections?
 
-When you configure both SSTP and IKEv2 in a mixed environment that consists of Windows and Mac devices, the Windows VPN client always tries the IKEv2 tunnel first. The client falls back to SSTP if the IKEv2 connection isn't successful. MacOS connects only via IKEv2.
+When you configure both SSTP and IKEv2 in a mixed environment that consists of Windows and Mac devices, the Windows VPN client always tries the IKEv2 tunnel first. The client falls back to SSTP if the IKEv2 connection isn't successful. macOS connects only via IKEv2.
 
 When you have both SSTP and IKEv2 enabled on the gateway, the point-to-site address pool is statically split between the two, so clients that use different protocols are IP addresses from either subrange. The maximum number of SSTP clients is always 128, even if the address range is larger than /24. The result is a larger number of addresses available for IKEv2 clients. For smaller ranges, the pool is equally halved. Traffic selectors that the gateway uses might not include the Classless Inter-Domain Routing (CIDR) block for the point-to-site address range but include the CIDR block for the two subranges.
 

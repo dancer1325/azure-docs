@@ -1,10 +1,11 @@
 ---
 title: Monitoring data reference for Azure Batch
 description: This article contains important reference material you need when you monitor Azure Batch.
-ms.date: 03/28/2024
+ms.date: 08/05/2026
 ms.custom: horz-monitor
 ms.topic: reference
 ms.service: azure-batch
+# Customer intent: As a system administrator, I want to access monitoring data for Azure Batch resources, so that I can effectively track performance and troubleshoot issues in my batch processing environments.
 ---
 
 # Azure Batch monitoring data reference
@@ -28,6 +29,8 @@ The following table lists the metrics available for the Microsoft.Batch/batchacc
 
 - poolId
 - jobId
+- operation
+- result
 
 [!INCLUDE [horz-monitor-ref-resource-logs](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-resource-logs.md)]
 
@@ -47,7 +50,9 @@ Batch service logs contain events emitted by the Batch service during the lifeti
 - [Task start](batch-task-start-event.md)
 - [Task complete](batch-task-complete-event.md)
 - [Task fail](batch-task-fail-event.md)
+- [Task requeue](batch-task-requeue-event.md)
 - [Task schedule fail](batch-task-schedule-fail-event.md)
+- [Special task](batch-special-task-event.md)
 
 Each event emitted by Batch is logged in JSON format. The following example shows the body of a sample **pool create event**:
 
@@ -58,24 +63,25 @@ Each event emitted by Batch is logged in JSON format. The following example show
     "vmSize": "Standard_F1s",
     "imageType": "VirtualMachineConfiguration",
     "cloudServiceConfiguration": {
-        "osFamily": "3",
-        "targetOsVersion": "*"
+        "osFamily": "",
+        "targetOsVersion": ""
     },
     "networkConfiguration": {
         "subnetId": " "
     },
     "virtualMachineConfiguration": {
-          "imageReference": {
-            "publisher": " ",
-            "offer": " ",
-            "sku": " ",
-            "version": " "
-          },
-          "nodeAgentId": " "
+        "imageReference": {
+            "publisher": "Canonical",
+            "offer": "UbuntuServer",
+            "sku": "20.04-LTS",
+            "version": "latest"
         },
+        "nodeAgentId": "batch.node.ubuntu 22.04"
+    },
     "resizeTimeout": "300000",
     "targetDedicatedNodes": 2,
     "targetLowPriorityNodes": 2,
+    "maxTasksPerNode": 1,
     "taskSlotsPerNode": 1,
     "vmFillType": "Spread",
     "enableAutoScale": false,

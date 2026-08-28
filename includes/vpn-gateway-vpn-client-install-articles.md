@@ -1,12 +1,12 @@
 ---
-author: cherylmc
-ms.author: cherylmc
+author: duongau
+ms.author: duau
 ms.date: 10/08/2024
 ms.service: azure-vpn-gateway
 ms.topic: include
 ---
 
-| Authentication | Tunnel type |Client OS|VPN client |
+| Authentication method | Tunnel type |Client OS|VPN client |
 | --- | --- | --- |---|
 | Certificate |    | |  |
 |  | IKEv2, SSTP   |Windows |  [Native VPN client](../articles/vpn-gateway/point-to-site-vpn-client-certificate-windows-native.md)|

@@ -2,12 +2,13 @@
 title: Create an ingress controller by using a new Application Gateway deployment
 description: This article provides information on how to deploy the Application Gateway Ingress Controller by using a new Application Gateway deployment.
 services: application-gateway
-author: greg-lindsay
+author: mbender-ms
 ms.service: azure-application-gateway
-ms.custom:
 ms.topic: how-to
-ms.date: 10/15/2024
-ms.author: greglin
+ms.date: 04/04/2025
+ms.author: mbender
+ms.custom: sfi-ropc-nochange
+# Customer intent: "As a Kubernetes administrator, I want to deploy the Application Gateway Ingress Controller with a new Application Gateway, so that I can manage ingress traffic efficiently for my applications running on Azure Kubernetes Service."
 ---
 
 # Install AGIC by using a new Application Gateway deployment
@@ -79,7 +80,7 @@ The following procedure adds these components to your subscription:
 - [Azure Application Gateway](./overview.md) v2
 - [Azure Virtual Network](../virtual-network/virtual-networks-overview.md) with two [subnets](../virtual-network/virtual-networks-overview.md)
 - [Public IP address](../virtual-network/ip-services/virtual-network-public-ip-address.md)
-- [Managed identity](../active-directory/managed-identities-azure-resources/overview.md), which [Microsoft Entra Pod Identity](https://github.com/Azure/aad-pod-identity/blob/master/README.md) will use.
+- [Managed identity](../active-directory/managed-identities-azure-resources/overview.md), which [Microsoft Entra Workload ID](https://github.com/Azure/aad-pod-identity/blob/master/README.md) will use.
 
 To deploy the components:
 
@@ -133,17 +134,17 @@ az aks get-credentials --resource-group $resourceGroupName --name $aksClusterNam
 
 <a name='install-azure-ad-pod-identity'></a>
 
-### Install Microsoft Entra Pod Identity
+### Install Microsoft Entra Workload ID
 
-[Microsoft Entra Pod Identity](https://github.com/Azure/aad-pod-identity) provides token-based access to [Azure Resource Manager](../azure-resource-manager/management/overview.md).
+[Microsoft Entra Workload ID](https://github.com/Azure/aad-pod-identity) provides token-based access to [Azure Resource Manager](../azure-resource-manager/management/overview.md).
 
-Microsoft Entra Pod Identity adds the following components to your Kubernetes cluster:
+Microsoft Entra Workload ID adds the following components to your Kubernetes cluster:
 
 - Kubernetes [custom resource definitions (CRDs)](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/): `AzureIdentity`, `AzureAssignedIdentity`, `AzureIdentityBinding`
 - [Managed Identity Controller (MIC)](https://github.com/Azure/aad-pod-identity#managed-identity-controllermic) component
 - [Node Managed Identity (NMI)](https://github.com/Azure/aad-pod-identity#node-managed-identitynmi) component
 
-To install Microsoft Entra Pod Identity to your cluster, use one of the following commands:
+To install Microsoft Entra Workload ID to your cluster, use one of the following commands:
 
 - Kubernetes RBAC-enabled AKS cluster:
 
@@ -267,7 +268,7 @@ If you use [Cloud Shell](https://shell.azure.com/), you don't need to install He
 
    - `verbosityLevel`: Sets the verbosity level of the AGIC logging infrastructure. For possible values, see [Logging levels](https://github.com/Azure/application-gateway-kubernetes-ingress/blob/463a87213bbc3106af6fce0f4023477216d2ad78/docs/troubleshooting.md#logging-levels).
    - `appgw.environment`: Sets the cloud environment. Possible values: `AZURECHINACLOUD`, `AZUREGERMANCLOUD`, `AZUREPUBLICCLOUD`, `AZUREUSGOVERNMENTCLOUD`.
-   - `appgw.subscriptionId`: The Azure subscription ID in which Application Gateway resides. Example: `aaaa0000-bb11-2222-33cc-444444dddddd`.
+   - `appgw.subscriptionId`: The Azure subscription ID in which Application Gateway resides. Example: `aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e`.
    - `appgw.resourceGroup`: Name of the Azure resource group in which you created the Application Gateway deployment. Example: `app-gw-resource-group`.
    - `appgw.name`: Name of the Application Gateway deployment. Example: `applicationgatewayd0f0`.
    - `appgw.shared`: Boolean flag that defaults to `false`. Set it to `true` if you need a [shared Application Gateway deployment](https://github.com/Azure/application-gateway-kubernetes-ingress/blob/072626cb4e37f7b7a1b0c4578c38d1eadc3e8701/docs/setup/install-existing.md#multi-cluster--shared-app-gateway).
@@ -289,7 +290,7 @@ If you use [Cloud Shell](https://shell.azure.com/), you don't need to install He
 1. Install the AGIC package:
 
     ```bash
-    helm install agic-controller oci://mcr.microsoft.com/azure-application-gateway/charts/ingress-azure --version 1.7.5 -f helm-config.yaml
+    helm install agic-controller oci://mcr.microsoft.com/azure-application-gateway/charts/ingress-azure --version 1.8.1 -f helm-config.yaml
     ```
 
 ## Install a sample app

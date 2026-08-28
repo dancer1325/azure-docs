@@ -6,13 +6,15 @@ author: kromerm
 ms.author: makromer
 ms.subservice: orchestration
 ms.custom: synapse
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 01/05/2024
 ---
 
 # Deactivate an Activity
 
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
+
+[!INCLUDE [Migrate to Data Factory in Microsoft Fabric](includes/migrate-to-fabric.md)]
 
 You can now deactivate one or more activities from a pipeline, and we skip them during validation and during pipeline run. This feature significantly improves pipeline developer efficiency, allowing customers to comment out part of the pipeline, without deleting it from the canvas. You may choose to reactivate them at a later time.
 
@@ -30,7 +32,7 @@ First, you may deactivate a single activity from its **General** tab.
 - Pick a state for _Mark activity as_. Choose from _Succeeded_, _Failed_ or _Skipped_
 
 
-:::image type="content" source="./media/deactivate-activity/deactivate-03-setup-single.png" alt-text="Deactive one activity at a time":::
+:::image type="content" source="./media/deactivate-activity/deactivate-03-setup-single.png" alt-text="Deactivate one activity at a time":::
 
 Alternatively, you can deactivate multiple activities with right click.
 
@@ -39,7 +41,7 @@ Alternatively, you can deactivate multiple activities with right click.
 - Select _Deactivate_ to deactivate them all
 - To fine tune the settings for _Mark activity as_, go to **General** tab of the activity, and make appropriate changes
 
-:::image type="content" source="./media/deactivate-activity/deactivate-04-setup-multiple.png" alt-text="Deactive multiple activities all at once":::
+:::image type="content" source="./media/deactivate-activity/deactivate-04-setup-multiple.png" alt-text="Deactivate multiple activities all at once":::
 
 In both cases, you do need to deploy the changes to deactivate the parts during pipeline run.
 

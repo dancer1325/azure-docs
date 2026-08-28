@@ -1,12 +1,14 @@
 ---
-title: Update Network Watcher extension to the latest version 
+title: Update Network Watcher Extension to the Latest Version
 description: Learn how to update the Azure Network Watcher Agent virtual machine (VM) extension to the latest version.
 author: halkazwini
 ms.author: halkazwini
 ms.service: azure-network-watcher
 ms.topic: how-to
-ms.date: 09/06/2024
+ms.date: 02/25/2026
 ms.custom: devx-track-azurepowershell, devx-track-azurecli
+
+# Customer intent: "As a cloud administrator, I want to update the Network Watcher extension on my Azure virtual machines, so that I can ensure optimal network performance and access the latest monitoring features."
 ---
 
 # Update Azure Network Watcher extension to the latest version
@@ -15,12 +17,15 @@ ms.custom: devx-track-azurepowershell, devx-track-azurecli
 
 ## Prerequisites
 
-- An Azure account with an active subscription. If you don't have one, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. If you don't have one, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - An Azure virtual machine (VM) that has the Network Watcher extension installed.
 
 ## Latest version
 
 [!INCLUDE [Network Watcher agent version](../../includes/network-watcher-agent-version.md)].
+
+> [!NOTE] 
+> When automatic extension upgrade is enabled, there may be a delay of up to 30 days between the release of a new extension version and its automatic upgrade on your virtual machines and scale sets.
 
 ### Identify latest version
 
@@ -64,7 +69,7 @@ param(
     [Parameter(Mandatory=$false)] 
     [Switch] $NoUpdate = $false, 
     [Parameter(Mandatory=$false)] 
-    [string] $MinVersion = "1.4.2573.1" 
+    [string] $MinVersion = "1.4.2.1" 
 )  
 function NeedsUpdate($version) 
 { 
@@ -238,4 +243,4 @@ If you have auto-upgrade set to true for the Network Watcher extension, reboot y
 
 ## Support
 
-If you need more help at any point in this article, see the Network Watcher extension documentation for [Linux](network-watcher-agent-linux.md) or [Windows](network-watcher-agent-windows.md). You can also contact the Azure experts on the [MSDN Azure and Stack Overflow forums](https://azure.microsoft.com/support/forums/). Alternatively, file an Azure support incident. Go to the [Azure support site](https://azure.microsoft.com/support/options/), and select **Get support**. For information about using Azure Support, read the [Microsoft Azure support FAQ](https://azure.microsoft.com/support/faq/).
+If you need more help at any point in this article, see the [Network Watcher Agent extension documentation](network-watcher-agent-manage.md). You can also contact the Azure experts on the [MSDN Azure and Stack Overflow forums](https://azure.microsoft.com/support/forums/). Alternatively, file an Azure support incident. Go to the [Azure support site](https://azure.microsoft.com/support/options/), and select **Get support**. For information about using Azure Support, read the [Microsoft Azure support FAQ](https://azure.microsoft.com/support/faq/).

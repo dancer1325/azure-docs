@@ -6,7 +6,7 @@ author: fred-cardoso
 ms.service: azure-container-apps
 ms.custom: devx-track-azurecli, devx-track-azurepowershell
 ms.topic: how-to
-ms.date: 09/16/2024
+ms.date: 03/31/2026
 ms.author: fredcardoso
 ---
 
@@ -30,7 +30,7 @@ If you're creating a new Container App through the [Azure portal](https://portal
 
 ### [Azure CLI](#tab/cli)
 
-You can create your Container App with enviroment variables using the [az containerapp create](/cli/azure/containerapp#az-containerapp-create) command by passing the environment variables as space-separated 'key=value' entries using the `--env-vars` parameter.
+You can create your Container App with environment variables using the [az containerapp create](/cli/azure/containerapp#az-containerapp-create) command by passing the environment variables as space-separated 'key=value' entries using the `--env-vars` parameter.
 
 ```azurecli
 az containerapp create -n my-containerapp -g MyResourceGroup \
@@ -167,6 +167,7 @@ The following variables are available to container apps:
 | `CONTAINER_APP_ENV_DNS_SUFFIX` | The DNS suffix for the Container Apps environment. To obtain the fully qualified domain name (FQDN) of the app, append the app name to the DNS suffix in the format `$CONTAINER_APP_NAME.$CONTAINER_APP_ENV_DNS_SUFFIX`. | `<DEFAULT_HOSTNAME>.<REGION>.azurecontainerapps.io` |
 | `CONTAINER_APP_PORT` | The target port of the container app. | `8080` |
 | `CONTAINER_APP_REPLICA_NAME` | The name of the container app replica. | `my-containerapp--20mh1s9-86c8c4b497-zx9bq` |
+| `CONTAINER_NAME` | The name of the replica. Available for managed function apps and logic apps. | `my-containerapp--20mh1s9-86c8c4b497-zx9bq` |
 
 ### Jobs
 

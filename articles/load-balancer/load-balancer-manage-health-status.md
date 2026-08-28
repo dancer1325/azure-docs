@@ -7,7 +7,10 @@ ms.service: azure-load-balancer
 ms.topic: concept-article
 ms.date: 10/30/2024
 ms.author: mbender
-ms.custom: references_regions
+ms.custom:
+  - references_regions
+  - sfi-image-nochange
+# Customer intent: "As a cloud operator, I want to manage the health status of backend instances in my load balancer, so that I can ensure optimal performance and reliability of my applications by quickly identifying and addressing any issues that arise."
 ---
 
 # Manage Azure Load Balancer Health Status
@@ -37,7 +40,7 @@ The following table describes the success reason codes where the backend state i
 
 | **Reason Code** | **Portal displayed reason** | **Description** |
 |-------------|-------------------------|-------------|
-| **Up_Probe_Succes**s | The backend instance is responding to health probe successfully. | Your backend instance is responding to the health probe successfully. |
+| **Up_Probe_Success** | The backend instance is responding to health probe successfully. | Your backend instance is responding to the health probe successfully. |
 | **Up_Probe_AllDownIsUp** | The backend instance is considered healthy due to enablement of *NoHealthyBackendsBehavior*. | Health probe state of the backend instance is ignored because *NoHealthyBackendsBehavior* is enabled. The backend instance is considered healthy and can receive traffic. |
 | **Up_Probe_ApproachingUnhealthyThreshold** | Health probe is approaching an unhealthy threshold but backend instance remains healthy based on last response. | The most recent probe has failed to respond but the backend instance remains healthy enough based on earlier responses. |
 | **Up_Admin**| The backend instance is healthy due to Admin State set to *Up*. | Health probe state of the backend instance is ignored because the Admin State is set to *UP*. The backend instance is considered healthy and can receive traffic. |
@@ -79,9 +82,6 @@ Health status can be retrieved on a per load balancing rule basis. This is suppo
 3. On the **Load Balancers** page, select your load balancer from the list.
 4. In your load balancer's **Settings** section, select **Load balancing rules**.
 5. In the **Load balancing rules** page, select **View details** under the **Health status** column for the rule you want to view.
-   
-   :::image type="content" source="media/load-balancer-manage-health-status/load-balancing-rules-list-small.png" alt-text="Screenshot of list of load balancing rules with health status link." lightbox="media/load-balancer-manage-health-status/load-balancing-rules-list.png":::
-
 6. Review the health status of your backend instances in the **Load balancing rule health status** window.
 7. To retrieve the latest health status, select **Refresh**.
 
@@ -97,25 +97,25 @@ Health status can be retrieved on a per load balancing rule basis. This is suppo
 To retrieve the health status information via REST API, you need to do a two request process.
 
 > [!NOTE]
-> Using the REST API method requres that you have a **Bearer access token** for autorization. For assistance retrieving the access token, see [Get-AzAccessToken](/powershell/module/az.accounts/get-azaccesstoken) for details.
+> Using the REST API method requires that you have a **Bearer access token** for authorization. For assistance retrieving the access token, see [Get-AzAccessToken](/powershell/module/az.accounts/get-azaccesstoken) for details.
 
 1. Use the following POST request to obtain the Location URI from the Response Headers.
 
    ```rest
-     POST https://management.azure.com/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/loadBalancers/<loadBalancerName>/loadBalancingRules/<loadBalancingRulesName>/health?api-version=2024-03-01&preserve-view=true
+     POST https://management.azure.com/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/loadBalancers/<loadBalancerName>/loadBalancingRules/<loadBalancingRulesName>/health?api-version=2025-07-01&preserve-view=true
        Authorization: Bearer <access token>
       ```
 
 1. Copy the Location URI from the Response Headers. Location URI should follow this schema.
 
    ```rest
-       https://management.azure.com/subscriptions/<subscriptionId>/providers/Microsoft.Network/locations/<locationName>/operationResults/<operationResultsId>?api-version=2024-03-01&preserve-view=true
+       https://management.azure.com/subscriptions/<subscriptionId>/providers/Microsoft.Network/locations/<locationName>/operationResults/<operationResultsId>?api-version=2025-07-01&preserve-view=true
    ```
 
 1. Use the copied Location URI to make a GET request.
 
    ```rest
-       GET https://management.azure.com/subscriptions/<subscriptionId>/providers/Microsoft.Network/locations/<locationName>/operationResults/<operationResultsId>?api-version=2024-03-01&preserve-view=true
+       GET https://management.azure.com/subscriptions/<subscriptionId>/providers/Microsoft.Network/locations/<locationName>/operationResults/<operationResultsId>?api-version=2025-07-01&preserve-view=true
        
        Authorization: Bearer <access token>
    ```

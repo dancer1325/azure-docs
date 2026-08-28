@@ -1,14 +1,15 @@
 ---
 title: Programmatically create Azure subscriptions with legacy APIs
 description: Learn how to create additional Azure subscriptions programmatically using legacy versions of REST API, Azure CLI, and Azure PowerShell.
-author: bandersmsft
+author: mijeffer
+ms.author: mijeffer
+ms.reviewer: mijeffer
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 02/14/2024
-ms.reviewer: sgautam
-ms.author: banders
+ms.date: 06/07/2026
 ms.custom: devx-track-azurepowershell, devx-track-azurecli
+service.tree.id: b69a7832-2929-4f60-bf9d-c6784a865ed8
 ---
 
 # Programmatically create Azure subscriptions with legacy APIs
@@ -371,7 +372,7 @@ Use the information in the following sections to create subscriptions for an MPA
 
 ### Prerequisites
 
-You must have a Global Admin or Admin Agent role in your organization's Cloud Solution Provider account to create subscription for your billing account. For more information, see [Partner Center - Assign users roles and permissions](/partner-center/permissions-overview).
+You must have an Admin Agent role in your organization's Cloud Solution Provider account to create subscription for your billing account. For more information, see [Partner Center - Assign users roles and permissions](/partner-center/permissions-overview).
 
 The following examples use REST APIs. Currently, PowerShell and Azure CLI aren't supported.
 

@@ -1,15 +1,31 @@
 ---
 title: Azure Site Recovery Deployment Planner Version History
 description: Known different Site Recovery Deployment Planner Versions fixes and known limitations along with their release dates.
-author: ankitaduttaMSFT
+author: Jeronika-MS
 ms.topic: overview
 ms.service: azure-site-recovery
-ms.date: 10/28/2024
-ms.author: ankitadutta
+ms.date: 12/18/2025
+ms.author: v-gajeronika
+# Customer intent: "As a cloud administrator, I want to review the version history of the Azure Site Recovery Deployment Planner, so that I can understand the fixes, improvements, and limitations in each release for effective planning and deployment."
 ---
+
 # Azure Site Recovery Deployment Planner Version History
 
 This article provides history of all versions of Azure Site Recovery Deployment Planner along with the fixes, known limitations in each and their release dates.
+
+## Version 3.2
+
+**Release Date: December 11, 2024**
+
+**Fixes**
+- Added support for AlmaLinux and Debian 12 in V2A Modern experience.
+  
+## Version 3.1
+
+**Release Date: September 10, 2024**
+
+**Fixes**
+- Fixed the file naming convention that caused Deployment Planner to fail to load XML files when you run it in the same directory as the deployment planner files.
 
 ## Version 3.0
 
@@ -181,5 +197,5 @@ Read more about [Large disk support in Azure Site Recovery](https://azure.micros
 
 - Supports only for VMware to Azure disaster recovery scenarios. For Hyper-V to Azure disaster recovery scenarios, use the [Hyper-V capacity planner tool](./hyper-v-deployment-planner-overview.md).
 - Doesn't support the GetThroughput operation for the US Government and China Microsoft Azure regions.
-- The tool cann't profile VMs if the vCenter server has two or more VMs with the same name or IP address across various ESXi hosts.
+- The tool can't profile VMs if the vCenter server has two or more VMs with the same name or IP address across various ESXi hosts.
 In this version, the tool skips profiling for duplicate VM names or IP addresses in the VMListFile. The workaround is to profile the VMs by using an ESXi host instead of the vCenter server. Ensure to run one instance for each ESXi host.

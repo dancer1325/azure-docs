@@ -3,9 +3,11 @@ title: Support for disaster recovery of Hyper-V VMs to Azure with Azure Site Rec
 description: Summarizes the supported components and requirements for Hyper-V VM disaster recovery to Azure with Azure Site Recovery
 ms.service: azure-site-recovery
 ms.topic: concept-article
-ms.date: 10/28/2024
-author: ankitaduttaMSFT
-ms.author: ankitadutta
+ms.date: 08/11/2026
+author: Jeronika-MS
+ms.author: v-gajeronika
+ms.custom: references_regions
+# Customer intent: As a IT admin managing on-premises Hyper-V VMs, I want to implement disaster recovery to Azure, so that I can ensure business continuity and data protection in case of on-premises failures.
 ---
 
 
@@ -20,7 +22,7 @@ This article summarizes the supported components and settings for disaster recov
 
 **Scenario** | **Details**
 --- | ---
-Hyper-V with Virtual Machine Manager <br> <br>| You can perform disaster recovery to Azure for VMs running on Hyper-V hosts that are managed in the System Center Virtual Machine Manager fabric.<br/><br/> You can deploy this scenario in the Azure portal or by using PowerShell.<br/><br/> When Hyper-V hosts are managed by Virtual Machine Manager, you also can perform disaster recovery to a secondary on-premises site. To learn more about this scenario, read [this tutorial](hyper-v-vmm-disaster-recovery.md).
+Hyper-V with Virtual Machine Manager <br> <br>| You can perform disaster recovery to Azure for VMs running on Hyper-V hosts that are managed in the System Center Virtual Machine Manager fabric.<br/><br/> You can deploy this scenario in the Azure portal or by using PowerShell.<br/><br/> When Hyper-V hosts are managed by Virtual Machine Manager, you also can perform disaster recovery to a secondary on-premises site. To learn more about this scenario, read [this tutorial](hyper-v-vmm-azure-tutorial.md).
 Hyper-V without Virtual Machine Manager | You can perform disaster recovery to Azure for VMs running on Hyper-V hosts that aren't managed by Virtual Machine Manager.<br/><br/> You can deploy this scenario in the Azure portal or by using PowerShell.
 
 > [!NOTE]
@@ -31,20 +33,21 @@ Hyper-V without Virtual Machine Manager | You can perform disaster recovery to A
 **Server** | **Requirements** | **Details**
 --- | --- | ---
 Hyper-V (running without Virtual Machine Manager) | Windows Server 2022, Windows Server 2019, Windows Server 2016, Windows Server 2012 R2 with latest updates <br/><br/> **Note:** Server core installations of these operating systems are also supported. | If you have already configured Windows Server 2012 R2 with/or SCVMM 2012 R2 with Azure Site Recovery and plan to upgrade the OS, please follow the guidance [documentation.](upgrade-2012R2-to-2016.md)
-Hyper-V (running with Virtual Machine Manager) | Virtual Machine Manager 2022  (Server core not supported), Virtual Machine Manager 2019, Virtual Machine Manager 2016, Virtual Machine Manager 2012 R2 <br/><br/> **Note:** Server core installations of these operating systems are also supported.  | If Virtual Machine Manager is used, Windows Server 2019 hosts should be managed in Virtual Machine Manager 2019. Similarly, Windows Server 2016 hosts should be managed in Virtual Machine Manager 2016.
+Hyper-V (running with Virtual Machine Manager) | Virtual Machine Manager 2025, Virtual Machine Manager 2022  (Server core not supported), Virtual Machine Manager 2019, Virtual Machine Manager 2016, Virtual Machine Manager 2012 R2 <br/><br/> **Note:** Server core installations of these operating systems are also supported.  | If Virtual Machine Manager is used, Windows Server 2019 hosts should be managed in Virtual Machine Manager 2019. Similarly, Windows Server 2016 hosts should be managed in Virtual Machine Manager 2016.
 
 > [!NOTE]
 > Ensure that .NET Framework 4.6.2 or higher is present on the on-premises server.
 
 ## Replicated VMs
 
+[!INCLUDE [end-of-life-notes-windows-server-2008.md](./includes/end-of-life-notes-windows-server-2008.md)]
 
 The following table summarizes VM support. Site Recovery supports any workloads running on a supported operating system.
 
  **Component** | **Details**
 --- | ---
 VM configuration | VMs that replicate to Azure must meet [Azure requirements](#azure-vm-requirements).
-Guest operating system | Any guest OS [supported for Azure](../cloud-services/cloud-services-guestos-update-matrix.md#family-5-releases)..<br/><br/> Windows Server 2016 Nano Server isn't supported.
+Guest operating system | Any guest OS [supported for Azure](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc794868%28v=ws.10%29#supported-guest-operating-systems). <br/><br/> Windows Server 2016 Nano Server isn't supported.
 
 
 ## VM/Disk management
@@ -109,7 +112,7 @@ Multi-path (MPIO). Tested with:<br></br> Microsoft DSM, EMC PowerPath 5.7 SP4, E
 VMDK | NA | NA
 VHD/VHDX | Yes | Yes
 Generation 2 VM | Yes | Yes
-EFI/UEFI<br></br>The migrated VM in Azure will be automatically converted to a BIOS boot VM. The VM should be running Windows Server 2012 and later only. The OS disk should have up to five partitions or fewer and the size of OS disk should be less than 2 TB.| Yes | Yes
+EFI/UEFI<br></br>The migrated VM in Azure will be automatically converted to a BIOS boot VM. The VM should be running Windows Server 2012 and later only. The OS disk should have up to four (4) partitions or fewer and the size of OS disk should be less than 2 TB.| Yes | Yes
 Shared cluster disk | No | No
 Encrypted disk | No | No
 NFS | NA | NA
@@ -120,12 +123,14 @@ Disk: 4K logical and physical sector | Not supported: Gen 1/Gen 2 | Not supporte
 Disk: 4K logical and 512-bytes physical sector | Yes |  Yes
 Logical volume management (LVM). LVM is supported on data disks only. Azure provides only a single OS disk. | Yes | Yes
 Volume with striped disk >1 TB | Yes | Yes
-Storage Spaces | No | No
+Storage Spaces/ Storage Spaces Direct (S2D) | No | No
 Hot add/remove disk | No | No
 Exclude disk | Yes | Yes
 Multi-path (MPIO) | Yes | Yes
 
 ## Azure Storage
+
+[!INCLUDE [hyper-v-to-azure-region-limitations.md](./includes/hyper-v-to-azure-region-limitations.md)]
 
 **Component** | **Hyper-V with Virtual Machine Manager** | **Hyper-V without Virtual Machine Manager**
 --- | --- | ---
@@ -178,7 +183,7 @@ FC disk | Not supported | Prerequisites check fails if unsupported.
 Hard disk format | VHD <br/><br/> VHDX | Site Recovery automatically converts VHDX to VHD when you fail over to Azure. When you fail back to on-premises, the virtual machines continue to use the VHDX format.
 BitLocker | Not supported | BitLocker must be disabled before you enable replication for a VM.
 VM name | Between 1 and 63 characters. Restricted to letters, numbers, and hyphens. The VM name must start and end with a letter or number. | Update the value in the VM properties in Site Recovery.
-VM type | Generation 1<br/><br/> Generation 2--Windows | Generation 2 VMs with an OS disk type of basic (which includes one or two data volumes formatted as VHDX) and less than 2 TB of disk space are supported.<br></br>Linux Generation 2 VMs aren't supported. [Learn more](https://azure.microsoft.com/blog/new-azure-migrate-and-azure-site-recovery-enhancements-for-cloud-migration/).|
+VM type | Generation 1<br/><br/> Generation 2 | Generation 2 VMs with an OS disk type of basic (which includes one or two data volumes formatted as VHDX) and less than 2 TB of disk space are supported. |
 
 ## Recovery Services vault actions
 
@@ -200,4 +205,5 @@ Azure Site Recovery provider | Coordinates communications between on-premises se
 Microsoft Azure Recovery Services agent | Coordinates replication between Hyper-V VMs and Azure<br/><br/> Installed on on-premises Hyper-V servers (with or without Virtual Machine Manager) | Latest agent available from the portal
 
 ## Next steps
-Learn how to [prepare Azure](tutorial-prepare-azure.md) for disaster recovery of on-premises Hyper-V VMs.
+
+Learn how to [prepare Azure](tutorial-prepare-azure-for-hyperv.md) for disaster recovery of on-premises Hyper-V VMs.

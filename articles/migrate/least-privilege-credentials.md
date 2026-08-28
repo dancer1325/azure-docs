@@ -6,8 +6,13 @@ ms.author: ajaypar
 ms.manager: roopesh.nair
 ms.topic: how-to
 ms.service: azure-migrate
-ms.date: 08/02/2023
-ms.custom: engagement-fy23
+ms.reviewer: jsuri
+ms.date: 02/06/2025
+ms.update-cycle: 1095-days
+ms.custom:
+  - engagement-fy23
+  - sfi-ropc-nochange
+# Customer intent: "As a database administrator, I want to create a custom account with minimal permissions for SQL Server discovery and assessment, so that I can securely establish connections without granting excessive access rights."
 ---
 
 # Provision custom accounts with least privileges for SQL Discovery and Assessment

@@ -2,10 +2,10 @@
 title: Logging for Azure Health Data Services
 description: Learn to monitor Azure Health Data Services with AuditLogs for secure healthcare service trails and operational insights. Discover log types and uses.
 services: healthcare-apis
-author: msjasteppe
+author: EXPEkesheth
 ms.service: azure-health-data-services
 ms.topic: tutorial
-ms.date: 09/12/2024
+ms.date: 02/25/2026
 ms.author: kesheth
 ---
 
@@ -47,8 +47,6 @@ Here's an example of the AuditLog:
 ## Next steps
 
 [Enable diagnostic logging in the DICOM service](./dicom/enable-diagnostic-logging.md)
-
-[Enable diagnostic settings for the MedTech service](./../healthcare-apis/iot/how-to-enable-diagnostic-settings.md)
 
 [Enable diagnostic logging in the de-identification service (preview)](./deidentification/monitor-deidentification-service-reference.md)
 
