@@ -1,0 +1,12 @@
+<BuildingBlocks>
+    <ClaimsSchema>
+        <ClaimType Id="Id">
+            <DisplayName>Surname</DisplayName>
+            <DataType>string</DataType>
+            <DefaultPartnerClaimTypes>
+                <Protocol Name="OAuth2" PartnerClaimType="family_name" />
+                <Protocol Name="OpenIdConnect" PartnerClaimType="family_name" />
+                <Protocol Name="SAML2" PartnerClaimType="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" />
+            </DefaultPartnerClaimTypes>
+            <UserHelpText>Your surname (also known as family name or last name).</UserHelpText>
+            <UserInputType>TextBox</UserInputType>

@@ -20,51 +20,43 @@ ms.custom:
 
 ---
 
-# ClaimsSchema
-[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
+# `<ClaimsSchema>`
 
-[!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
+* [AD B2C end of sale](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
-The **ClaimsSchema** element defines the claim types that can be referenced as part of the policy. Claims schema is the place where you declare your claims. A claim can be first name, last name, display name, phone number and more. ClaimsSchema element contains list of **ClaimType** elements. The **ClaimType** element contains the **Id** attribute, which is the claim name.
+* [custom policies vs user flows use cases](../../includes/active-directory-b2c-advanced-audience-warning.md)
 
-```xml
-<BuildingBlocks>
-  <ClaimsSchema>
-    <ClaimType Id="Id">
-      <DisplayName>Surname</DisplayName>
-      <DataType>string</DataType>
-      <DefaultPartnerClaimTypes>
-        <Protocol Name="OAuth2" PartnerClaimType="family_name" />
-        <Protocol Name="OpenIdConnect" PartnerClaimType="family_name" />
-        <Protocol Name="SAML2" PartnerClaimType="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" />
-      </DefaultPartnerClaimTypes>
-      <UserHelpText>Your surname (also known as family name or last name).</UserHelpText>
-      <UserInputType>TextBox</UserInputType>
-```
+* `<ClaimsSchema>`
+  * == claim types (`<ClaimType>`) /
+    * can be referenced -- as -- part of the policy
+  * == place | declare your claims
+  * _Example of claims:_
+    * first name, 
+    * last name,
+    * display name,
+    * phone number
 
-## ClaimType
+## `<ClaimType>`
 
-The **ClaimType** element contains the following attribute:
+* 's attributes
+    
+    | Attribute  | Required | Description                                |
+    |------------|----------|--------------------------------------------|
+    | Id         | Yes      | == claim name <br/>uses: by OTHER elements |
 
-| Attribute | Required | Description |
-| --------- | -------- | ----------- |
-| Id | Yes | An identifier that's used for the claim type. Other elements can use this identifier in the policy. |
-
-The **ClaimType** element contains the following elements:
-
-| Element | Occurrences | Description |
-| ------- | ----------- | ----------- |
-| DisplayName | 1:1 | The title that's displayed to users on various screens. The value can be [localized](localization.md). |
-| DataType | 1:1 | The type of the claim. |
-| DefaultPartnerClaimTypes | 0:1 | The partner default claim types to use for a specified protocol. The value can be overwritten in the **PartnerClaimType** specified in the **InputClaim** or **OutputClaim** elements. Use this element to specify the default name for a protocol.  |
-| Mask | 0:1 | An optional string of masking characters that can be applied when displaying the claim. For example, the phone number 324-232-4343 can be masked as XXX-XXX-4343. |
-| UserHelpText | 0:1 | A description of the claim type that can be helpful for users to understand its purpose. The value can be [localized](localization.md). |
-| UserInputType | 0:1 | The type of input control that should be available to the user when manually entering the claim data for the claim type. See the user input types defined later in this page. |
-| AdminHelpText | 0:1 | A description of the claim type that can be helpful for administrators to understand its purpose. |
-| Restriction | 0:1 | The value restrictions for this claim, such as a regular expression (Regex) or a list of acceptable values. The value can be [localized](localization.md). |
-PredicateValidationReference| 0:1 | A reference to a **PredicateValidationsInput** element. The **PredicateValidationReference** elements enable you to perform a validation process to ensure that only properly formed data is entered. For more information, see [Predicates](predicates.md). |
-
-
+* 's elements
+    
+    | Element                      | Occurrences  | Description                                                                                                                                                                                                                                                  |
+    |------------------------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | DisplayName                  | 1:1          | title / displayed to users \| various screens <br/> [you can localize the value](localization.md)                                                                                                                                                            |
+    | DataType                     | 1:1          | type of claim                                                                                                                                                                                                                                                |
+    | DefaultPartnerClaimTypes     | 0:1          | The partner default claim types to use for a specified protocol <br/> The value can be overwritten in the **PartnerClaimType** specified in the **InputClaim** or **OutputClaim** elements. Use this element to specify the default name for a protocol.          |
+    | Mask                         | 0:1          | An optional string of masking characters that can be applied when displaying the claim. For example, the phone number 324-232-4343 can be masked as XXX-XXX-4343.                                                                                            |
+    | UserHelpText                 | 0:1          | A description of the claim type that can be helpful for users to understand its purpose. The value can be [localized](localization.md).                                                                                                                      |
+    | UserInputType                | 0:1          | The type of input control that should be available to the user when manually entering the claim data for the claim type. See the user input types defined later in this page.                                                                                |
+    | AdminHelpText                | 0:1          | A description of the claim type that can be helpful for administrators to understand its purpose.                                                                                                                                                            |
+    | Restriction                  | 0:1          | The value restrictions for this claim, such as a regular expression (Regex) or a list of acceptable values. The value can be [localized](localization.md).                                                                                                   |
+    | PredicateValidationReference | 0:1          | A reference to a **PredicateValidationsInput** element. The **PredicateValidationReference** elements enable you to perform a validation process to ensure that only properly formed data is entered. For more information, see [Predicates](predicates.md). |
 
 ### DataType
 
